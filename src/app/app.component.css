@@ -1,0 +1,25 @@
+.navbar {
+    border-bottom: none !important;
+    box-shadow: none !important;
+    margin-bottom: 0;
+  }
+
+.nav-link {
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #cc0fe0;
+    border-bottom: 2px solid #cc0fe0;
+}
+
+/* Resalta el enlace activo */
+.nav-link.active {
+    color: #cc0fe0 !important;
+    border-bottom: 2px solid #cc0fe0;
+}
+
+/* Mejora la visibilidad del botón en modo móvil */
+.navbar-toggler-icon {
+    background-color: white;
+}

@@ -1,0 +1,89 @@
+<div class="container" style="background-color: #ffffff; min-height: 100vh; padding: 20px;"> 
+  <!-- Título principal -->
+  <h1 class="text-center mb-4" style="color: #239b56; font-weight: bold;">Mi Lista de Reproducción</h1>
+
+  <!-- Formulario con estilo más compacto y labels -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-6">
+      <div class="card" style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;">
+        <div class="form-group mb-3">
+          <label for="nombreCancion" style="color: #495057; font-size: 14px; margin-bottom: 5px;">Nombre de la Canción:</label>
+          <input type="text" id="nombreCancion" class="form-control form-control-sm" [(ngModel)]="cancion.nombre"
+                 style="background-color: #e9ecef; color: black; border: none;">
+        </div>
+        <div class="form-group mb-3">
+          <label for="artistaCancion" style="color: #495057; font-size: 14px; margin-bottom: 5px;">Artista:</label>
+          <input type="text" id="artistaCancion" class="form-control form-control-sm" [(ngModel)]="cancion.artista"
+                 style="background-color: #e9ecef; color: black; border: none;">
+        </div>
+        <div class="form-group mb-3">
+          <label for="albumCancion" style="color: #495057; font-size: 14px; margin-bottom: 5px;">Álbum:</label>
+          <input type="text" id="albumCancion" class="form-control form-control-sm" [(ngModel)]="cancion.album"
+                 style="background-color: #e9ecef; color: black; border: none;">
+        </div>
+        <div class="form-group mb-3">
+          <label for="calificacionCancion" style="color: #495057; font-size: 14px; margin-bottom: 5px;">Calificación (0-5):</label>
+          <input type="number" id="calificacionCancion" min="0" max="5" class="form-control form-control-sm" 
+                 [(ngModel)]="cancion.calificacion" style="background-color: #e9ecef; color: black; border: none;">
+        </div>
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-sm" (click)="insertarCancion()"
+                  style="background-color: #239b56; color: white; flex: 1;">
+            <i class="bi bi-plus-lg"></i><b>Agregar</b> 
+          </button>
+          <button type="button" class="btn btn-sm" (click)="updateCancion()"
+                  style="background-color: #2980b9; color: white; flex: 1;">
+            <i class="bi bi-pencil"></i><b>Modificar</b>  
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla estilo mejorado -->
+  @if(canciones.length > 0){
+    <div class="table-responsive">
+      <table class="table table-hover" style="background-color: #f8f9fa; border-radius: 10px;">
+        <thead style="background-color: #dee2e6;">
+          <tr style="border-bottom: 1px solid #adb5bd;">
+            <th scope="col" style="color: #495057; font-size: 14px; text-align: center;">ID</th>
+            <th scope="col" style="color: #495057; font-size: 14px; text-align: center;">TÍTULO</th>
+            <th scope="col" style="color: #495057; font-size: 14px; text-align: center;">ARTISTA</th>
+            <th scope="col" style="color: #495057; font-size: 14px; text-align: center;">ÁLBUM</th>
+            <th scope="col" style="color: #495057; font-size: 14px; text-align: center;">Calificación</th>
+            <th scope="col" style="color: #495057; font-size: 14px; text-align: center;">ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(cancion of canciones; track cancion.id){
+            <tr style="border-bottom: 1px solid #ced4da; transition: background 0.3s;" 
+                onmouseover="this.style.backgroundColor='#e9ecef';" 
+                onmouseout="this.style.backgroundColor='transparent';">
+              <td style="color: #495057; text-align: center;">{{ cancion.id }}</td>
+              <td style="color: black; text-align: center;">{{ cancion.nombre }}</td>
+              <td style="color: #495057; text-align: center;">{{ cancion.artista }}</td>
+              <td style="color: #495057; text-align: center;">{{ cancion.album }}</td>
+              <td style="color: #239b56; text-align: center;">
+                <i class="bi bi-star-fill"></i> {{ cancion.calificacion }}/5
+              </td>
+              <td style="text-align: center;">
+                <button class="btn btn-sm me-2" (click)="selectCancion(cancion)"
+                        style="background-color: #239b56; color: white;">
+                  <i class="bi bi-pencil"></i><b>Seleccionar</b> 
+                </button>
+                <button class="btn btn-sm" (click)="deleteCancion(cancion.id)"
+                        style="background-color: #E91429; color: white;">
+                  <i class="bi bi-trash"></i><b>Eliminar</b> 
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <div class="text-center" style="color: #495057;">
+      <h3>No hay canciones en la lista</h3>
+    </div>
+  }
+</div>
